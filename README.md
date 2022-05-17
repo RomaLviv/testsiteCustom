@@ -1,2 +1,3 @@
 # testsiteCustom
- For Training
+ Custom WP_Template For Training
+ Customizer build...
