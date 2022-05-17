@@ -198,6 +198,5 @@ get_header();
         </div>
     </div>
 <?php endif ?> 
-<h1>none</h1>
 
 <?php get_footer();?>
