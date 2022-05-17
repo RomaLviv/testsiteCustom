@@ -1,6 +1,7 @@
 <?php
     add_action('wp_enqueue_scripts', 'add_scripts_and_styles');
     add_action('customize_preview_init', 'theme_preview_register');
+    add_action('customize_preview_init', 'theme_preview_register');
     add_action('after_setup_theme', 'add_features');
     add_action('after_setup_theme', 'add_menu');
     add_theme_support('custom-logo');
@@ -21,6 +22,11 @@
   function theme_preview_register() {
     wp_enqueue_script('customizer', get_template_directory_uri() . '/assets/js/customizer.js', array('jquery'), null, 'footer');
   }
+
+  define( 'CUSTOMIZER_REPEATER_VERSION', '1.1.0' );
+  require get_template_directory() . '/customizer-repeater/inc/customizer.php';
+ 
+
   function add_features(){
     add_theme_support('custom-logo', [
       'height'  => 50,
@@ -88,6 +94,30 @@ $wp_customize->add_setting('color_button_text', array(
         'type'	 => 'text',
         'priority' => 4
       ) );
+
+// TEST
+
+$wp_customize->add_section('test_section', array(
+      'title' => __('Text Section', 'testsite'),
+      'priority' => 10,
+      'panel' => 'custom_settings'
+    ));
+      $wp_customize->add_setting( 'customizer_repeater_example', array(
+        'sanitize_callback' => 'customizer_repeater_sanitize'
+     ));
+     $wp_customize->add_control( new Customizer_Repeater( $wp_customize, 'customizer_repeater_example', array(
+        'label'   => esc_html__('Example','customizer-repeater'),
+        'section' => 'test_section',
+        'priority' => 1,
+        'customizer_repeater_image_control' => true,
+        'customizer_repeater_icon_control' => true,
+        'customizer_repeater_title_control' => true,
+        'customizer_repeater_subtitle_control' => true,
+        'customizer_repeater_text_control' => true,
+        'customizer_repeater_link_control' => true,
+        'customizer_repeater_shortcode_control' => true,
+        'customizer_repeater_repeater_control' => true
+        ) ) );
 
 
 
